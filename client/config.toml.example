@@ -1,0 +1,4 @@
+SERVER_ADDRESS = "localhost"
+PORT = 8000
+PC_NAME = "default"
+HEARTBEAT_INTERVAL = 3        # [seconds] Interval between reports to the server

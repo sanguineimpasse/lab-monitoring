@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "0.1",
+  "description": "backend for lm-backend",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node ."
+  },
+  "author": "sanguineimpasse",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
