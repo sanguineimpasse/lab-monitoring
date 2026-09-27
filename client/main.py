@@ -1,5 +1,6 @@
 import time
 import platform
+import json
 # external dependencies
 import tomli
 
@@ -14,9 +15,6 @@ SERVER_URL = f'http://{config["SERVER_ADDRESS"]}:{config["PORT"]}/api/report'
 HEARTBEAT_INTERVAL = config["HEARTBEAT_INTERVAL"]
 HOSTNAME = platform.node()
 
-def startup_functions():
-    # incase we need to run something ONCE during startup
-    pass
 
 def startup_message():
     print("-----------------------------------------------")
@@ -26,15 +24,27 @@ def startup_message():
     print("-----------------------------------------------")
     print(f"\nReporting started (interval - [{HEARTBEAT_INTERVAL}] seconds):")
 
-def main():
+def startup_functions():
     startup_message()
+    # incase we need to run something ONCE during startup
+
+def main():
     startup_functions()
 
     while True:
         system_resources = sysmon.get_system_resources()
-        print(system_resources)
+        input_devices = sysmon.get_input_devices() # polling devices every interval might be a bit too expensive, consider another way to do this
 
-        print(f"the heart beats {HEARTBEAT_INTERVAL}")
+        payload = {
+            "hostname": HOSTNAME,
+            "system_resources":system_resources,
+            "input_devices": input_devices
+        }
+
+        # debug printout
+        print(json.dumps(payload, indent=2))
+
+        print(f"the heart beats ({HEARTBEAT_INTERVAL})")
         time.sleep(HEARTBEAT_INTERVAL)
 
 main()

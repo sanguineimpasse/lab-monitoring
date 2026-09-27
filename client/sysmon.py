@@ -6,6 +6,10 @@
 #
 
 import psutil
+import wmi
+
+# aliases
+c = wmi.WMI()
 
 # get system vitals -- ensure it's breathes normally
 ## currently tracks CPU,MEM,STORAGE,BATT, and UPTIME
@@ -61,3 +65,20 @@ def get_system_resources():
         "battery": battery,
         "uptime": uptime
     }
+
+def get_input_devices():
+    devices = []
+
+    for device in c.Win32_PnPEntity():
+        name = device.Name or ""
+        pnp_class = device.PNPClass or ""
+
+        if pnp_class in ("Keyboard", "Mouse"):
+            devices.append({
+                "name": name,
+                "class": pnp_class,
+                "status": device.Status,
+                "device_id": device.PNPDeviceID,
+            })
+    
+    return devices
