@@ -1,6 +1,7 @@
 import time
 import platform
 import json
+import signal
 # external dependencies
 import tomli
 
@@ -11,10 +12,12 @@ import sysmon
 with open("config.toml", "rb") as f:
     config = tomli.load(f)
 
+VERBOSE_MODE = config["VERBOSE_MODE"]
 SERVER_URL = f'http://{config["SERVER_ADDRESS"]}:{config["PORT"]}/api/report'
 HEARTBEAT_INTERVAL = config["HEARTBEAT_INTERVAL"]
 HOSTNAME = platform.node()
 
+running = True
 
 def startup_message():
     print("-----------------------------------------------")
@@ -28,10 +31,19 @@ def startup_functions():
     startup_message()
     # incase we need to run something ONCE during startup
 
+def shutdown(signum, frame):
+    global running
+    print("\nShutdown requested...")
+    running = False
+
+signal.signal(signal.SIGINT, shutdown)   # Ctrl+C
+signal.signal(signal.SIGTERM, shutdown)  # system/service stop
+
 def main():
+    global running
     startup_functions()
 
-    while True:
+    while running:
         system_resources = sysmon.get_system_resources()
         input_devices = sysmon.get_input_devices() # polling devices every interval might be a bit too expensive, consider another way to do this
 
@@ -47,4 +59,8 @@ def main():
         print(f"the heart beats ({HEARTBEAT_INTERVAL})")
         time.sleep(HEARTBEAT_INTERVAL)
 
-main()
+    print("Client stopped.")
+
+
+if __name__ == "__main__":
+    main()
