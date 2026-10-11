@@ -2,8 +2,7 @@
 function DashboardPage() {
   return(
     <>
-    <h1>Hi!</h1>
-    <p>You are in the dashboard :D</p>
+    <h1 className="text-4xl font-medium">{"Dashboard"}</h1>
     </>
   )
 }
