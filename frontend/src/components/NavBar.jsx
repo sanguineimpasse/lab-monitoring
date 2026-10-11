@@ -2,7 +2,12 @@ import { Button } from "#components/ui/button"
 import { LayoutDashboard, MonitorDot, Wrench } from "lucide-react";
 import { NavLink } from "react-router";
 
-function NavButton({ to, icon: Icon, children, buttonVariant = "outline" }){ 
+function NavButton({ 
+    to, 
+    icon: Icon, 
+    children, 
+    buttonVariant = "outline" 
+}){ 
     return ( 
         <NavLink to={to} end> 
             {({ isActive }) => ( 
@@ -17,7 +22,7 @@ function NavButton({ to, icon: Icon, children, buttonVariant = "outline" }){
 
 function NavBar() {
     return(
-        <div className="flex flex-row p-4 gap-2 items-center">
+        <div className="flex flex-row px-4 py-3 gap-2 items-center">
             {/* <h1 className="text-2xl p-4">{"lab-monitoring"}</h1> */}
             <NavButton to="/dashboard" icon={LayoutDashboard}>
                 Dashboard

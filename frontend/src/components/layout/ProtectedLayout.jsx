@@ -16,8 +16,8 @@ function ProtectedLayout(){
 				becoming its border
 
 			*/}
-			<div className="px-4 pb-2 flex-1 min-h-0">
-				<div className="rounded-2xl bg-background p-8 h-full">
+			<div className="px-4 flex-1 min-h-0">
+				<div className="rounded-t-2xl bg-background p-7 h-full">
 					<Outlet/>
 				</div>
 			</div>
