@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router"
 import LoginPage from "./pages/LoginPage"
 import DashboardPage from "./pages/protected/DashboardPage"
 
-import ProtectedLayout from "./components/ProtectedLayout"
+import ProtectedLayout from "./components/layout/ProtectedLayout"
 
 function AppRouter(){
     return(
