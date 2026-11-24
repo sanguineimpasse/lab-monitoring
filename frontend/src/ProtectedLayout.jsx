@@ -1,12 +1,24 @@
 import { Outlet } from "react-router";
-import NavBar from "./NavBar";
+
+function NavBar() {
+    return(
+      <div className="flex flex-row bg-red-500">
+        
+      </div>
+    )
+}
 
 function ProtectedLayout(){
 	return(
-		<>
+		<div className="
+			flex 
+			flex-col 
+			w-dvw 
+			h-dvh
+		">
 			<NavBar/>
 			<Outlet/>
-		</>
+		</div>
 	)
 }
 
