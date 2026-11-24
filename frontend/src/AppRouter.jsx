@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router"
 
-import ProtectedLayout from "./components/ProtectedLayout"
+import ProtectedLayout from "./ProtectedLayout"
 import NotFound from "./pages/NotFound"
 import LoginPage from "./pages/LoginPage"
 
